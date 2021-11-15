@@ -132,8 +132,6 @@ export class DummyComponent implements OnInit, AfterViewInit {
 
   private initializeModel(): void {
     this.model = new Dummy();
-    // this.form.reset();
-    // this.form.get('wording').setValue('');
   }
 
   // HTTP METHODS
@@ -197,16 +195,17 @@ export class DummyComponent implements OnInit, AfterViewInit {
   afterSave(): void {
     this.loadAll();
     this.model = new Dummy();
-    this.form.reset();
-    Object.keys(this.form.controls).forEach(key => {
-      this.form.get(key).markAsPristine();
-    });
+    // this.form.reset();
+    // Object.keys(this.form.controls).forEach(key => {
+    //   this.form.get(key).markAsPristine();
+    // });
+
+    this.buildForm();
+    this.subscribe();
     this.showSuccess('Opération effectuée avec succès');
   }
 
   goToForm(): void {
     this.listView = false;
-    this.buildForm();
-    this.subscribe();
   }
 }

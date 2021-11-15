@@ -118,7 +118,9 @@ mat-form-field {
   width: 98%;
   padding: 1%;
   box-shadow: none;
-  margin-top: 50px;
+  min-height: 600px;
+  /*overflow-y: scroll;*/
+  /*margin-top: 50px;*/
 }
 
 .showFormPanel {
@@ -152,4 +154,29 @@ mat-form-field {
 mat-cell:last-of-type, mat-header-cell:last-of-type, mat-footer-cell:last-of-type {
   display: flex;
   justify-content: end;
+}
+
+.lower-header {
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVlsRKexeDmwIR3iYgnWCclqUlZmGuOX5epA&usqp=CAU');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  height: 200px;
+  width: 100%;
+  margin-top: 32px;
+}
+
+.footerks {
+  /*background: #9697a5;*/
+  height: 50px;
+  width: 100%;
+  margin-top: 50px;
+  /*bottom: 0;*/
+  /*position: fixed;*/
+  border-top: 1px solid #9697a5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: small;
+  font-weight: bold;
 }

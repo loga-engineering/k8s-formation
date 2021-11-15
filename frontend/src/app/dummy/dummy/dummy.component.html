@@ -1,13 +1,6 @@
 <ngx-loading [show]="sngLoadingIndicator"></ngx-loading>
 
-<div class="nav-bar mat-card">
-  <div class="logo">
-    <img src="assets/image/loga.png">
-  </div>
-  <div class="k8s">
-    K8s-formation
-  </div>
-</div>
+<div class="lower-header"></div>
 
 <div class="container-principal">
 
@@ -135,10 +128,22 @@
 
       </mat-table>
 
-      <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+      <mat-paginator [pageSizeOptions]="[5, 10]"></mat-paginator>
     </div>
 
   </div>
 
 </div>
 
+<div class="footerks mat-card mat-elevation-z24">
+  @Copyright reserved
+</div>
+
+<div class="nav-bar mat-card">
+  <div class="logo">
+    <img src="assets/image/loga.png">
+  </div>
+  <div class="k8s">
+    K8s-formation
+  </div>
+</div>
