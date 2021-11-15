@@ -1,0 +1,20 @@
+button {
+    padding: 7px 14px;
+    text-align: center;
+    font-size: medium;
+    color: white;
+    border: none;
+    outline: none;
+}
+
+.ok-btn {
+    background: goldenrod;
+}
+
+.cnl-btn {
+    background: red;
+}
+
+::ng-deep.mat-dialog-container {
+    /*background: #00b09b !important;*/
+}

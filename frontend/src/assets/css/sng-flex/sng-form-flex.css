@@ -1,0 +1,27 @@
+/*
+SANOGO coding...
+*/
+
+.multiple-fields {
+  display: flex !important;
+  flex-wrap: nowrap;
+  justify-content: space-between !important;
+  width: 100%;
+}
+
+.multiple-fields mat-form-field {
+  width: 100% !important;
+}
+
+.multiple-fields mat-form-field:not(:last-child) {
+  margin-right: 1%;
+}
+
+.sng-form-container {
+  /*margin: auto;*/
+  width: 40%;
+}
+
+.form-menu {
+  margin-bottom: 10px;
+}
