@@ -1,22 +1,21 @@
 <ngx-loading [show]="sngLoadingIndicator"></ngx-loading>
 
+<div class="lower-header"></div>
+
 <div class="container-principal">
-  <div class="logo">
-    <img src="assets/image/loga.png">
-  </div>
 
   <div class="container">
-    <div class="sng-form-container mat-card" id="form-id">
+    <div class="sng-form-container mat-card" id="form-id" [ngStyle]="{display: listView ? 'none': 'block'}">
       <form [formGroup]="form" name="form">
 
         <mat-form-field appearance="outline">
           <mat-label>Libéllé</mat-label>
           <input matInput name="name" placeholder="Libéllé" matTooltip="Libéllé"
                  formControlName="wording" required>
-<!--          <mat-error-->
-<!--            *ngIf="form.controls['wording'].invalid && form.controls['wording'].dirty && form.controls['wording'].errors['required']">-->
-<!--            Ce champ est obligatoire-->
-<!--          </mat-error>-->
+          <mat-error
+            *ngIf="form.controls['wording'].invalid && form.controls['wording'].dirty && form.controls['wording'].errors['required']">
+            Ce champ est obligatoire
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -26,15 +25,11 @@
         </mat-form-field>
 
         <div class="btn-validators-cont">
-          <button mat-raised-button (click)="save()"
-                  *ngIf="!model.id"
-                  [disabled]="form.invalid">
+          <button mat-raised-button (click)="save()" *ngIf="!model.id" [disabled]="form.invalid">
             Enregistrer
           </button>
 
-          <button mat-raised-button (click)="update()"
-                  *ngIf="model.id"
-                  [disabled]="form.invalid">
+          <button mat-raised-button (click)="update()" *ngIf="model.id" [disabled]="form.invalid">
             Modifier
           </button>
         </div>
@@ -42,7 +37,7 @@
 
     </div>
 
-    <div class="sng-list-container mat-card">
+    <div class="sng-list-container mat-card" [ngStyle]="{width: listView ? '100%': '65%'}">
 
       <div class="map-options">
         <div class="search-wrapper mx-32 mx-md-0 search-box search-menus">
@@ -53,9 +48,15 @@
         </div>
 
         <div>
-          <button mat-raised-button (click)="goToForm()"
-                  matTooltip="Ajouter utilisateur">
+          <button mat-raised-button (click)="goToForm()" *ngIf="listView"
+                  matTooltip="Ajouter">
             <i class="material-icons">add</i> Ajouter
+          </button>
+
+          <button mat-raised-button (click)="listView = true"
+                  *ngIf="!listView"
+                  matTooltip="Plein ecran">
+            <i class="material-icons">zoom_out_map</i> Plein ecran
           </button>
           &nbsp;
           <button mat-raised-button class="btn-refresh" (click)="loadAll()"
@@ -111,7 +112,7 @@
                   <span>Modifier</span>
                 </button>
 
-                <button mat-menu-item aria-label="remove" (click)="delete(component)">
+                <button mat-menu-item aria-label="remove" (click)="delete(component, 'ce Dummy')">
                   <mat-icon>delete</mat-icon>
                   <span>Supprimer</span>
                 </button>
@@ -127,10 +128,22 @@
 
       </mat-table>
 
-      <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+      <mat-paginator [pageSizeOptions]="[5, 10]"></mat-paginator>
     </div>
 
   </div>
 
 </div>
 
+<div class="footerks mat-card mat-elevation-z24">
+  @Copyright reserved
+</div>
+
+<div class="nav-bar mat-card">
+  <div class="logo">
+    <img src="assets/image/loga.png">
+  </div>
+  <div class="k8s">
+    K8s-formation
+  </div>
+</div>
