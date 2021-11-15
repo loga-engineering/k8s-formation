@@ -1,5 +1,5 @@
 button {
-    padding: 7px 14px;
+    padding: 3px 14px;
     text-align: center;
     font-size: medium;
     color: white;
@@ -8,7 +8,7 @@ button {
 }
 
 .ok-btn {
-    background: goldenrod;
+    background: cadetblue;
 }
 
 .cnl-btn {

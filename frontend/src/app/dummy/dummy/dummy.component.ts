@@ -99,7 +99,7 @@ export class DummyComponent implements OnInit, AfterViewInit {
       this.startLoading();
       this.service.delete(model.id).subscribe(value => {
         console.log('parent delete ok');
-        this.loadAll();
+        this.afterSave();
         this.endLoading();
         this.showSuccess('Supprimé avec succès');
       }, error => {
@@ -199,13 +199,14 @@ export class DummyComponent implements OnInit, AfterViewInit {
     this.model = new Dummy();
     this.form.reset();
     Object.keys(this.form.controls).forEach(key => {
-      this.form.get(key).setErrors(null);
+      this.form.get(key).markAsPristine();
     });
     this.showSuccess('Opération effectuée avec succès');
   }
 
   goToForm(): void {
     this.listView = false;
-    // this.form.get('wording').se
+    this.buildForm();
+    this.subscribe();
   }
 }

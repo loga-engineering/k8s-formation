@@ -19,10 +19,10 @@
           <mat-label>Libéllé</mat-label>
           <input matInput name="name" placeholder="Libéllé" matTooltip="Libéllé"
                  formControlName="wording" required>
-<!--          <mat-error-->
-<!--            *ngIf="form.controls['wording'].invalid && form.controls['wording'].dirty && form.controls['wording'].errors['required']">-->
-<!--            Ce champ est obligatoire-->
-<!--          </mat-error>-->
+          <mat-error
+            *ngIf="form.controls['wording'].invalid && form.controls['wording'].dirty && form.controls['wording'].errors['required']">
+            Ce champ est obligatoire
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -32,15 +32,11 @@
         </mat-form-field>
 
         <div class="btn-validators-cont">
-          <button mat-raised-button (click)="save()"
-                  *ngIf="!model.id"
-                  [disabled]="form.invalid">
+          <button mat-raised-button (click)="save()" *ngIf="!model.id" [disabled]="form.invalid">
             Enregistrer
           </button>
 
-          <button mat-raised-button (click)="update()"
-                  *ngIf="model.id"
-                  [disabled]="form.invalid">
+          <button mat-raised-button (click)="update()" *ngIf="model.id" [disabled]="form.invalid">
             Modifier
           </button>
         </div>
@@ -123,7 +119,7 @@
                   <span>Modifier</span>
                 </button>
 
-                <button mat-menu-item aria-label="remove" (click)="delete(component)">
+                <button mat-menu-item aria-label="remove" (click)="delete(component, 'ce Dummy')">
                   <mat-icon>delete</mat-icon>
                   <span>Supprimer</span>
                 </button>
