@@ -35,6 +35,7 @@ export class DummyComponent implements OnInit, AfterViewInit {
   entities: any[];
   pageIndex = 0;
   displayedColumns = ['wording', 'description', 'createdDate', 'actions'];
+  listView = true;
 
   sngLoadingIndicator: boolean;
 
@@ -60,7 +61,6 @@ export class DummyComponent implements OnInit, AfterViewInit {
   }
 
   goToForm(): void {
-    // this.lsf.navigateTo('form');
     this.showFormPanel();
   }
 
@@ -71,6 +71,7 @@ export class DummyComponent implements OnInit, AfterViewInit {
   }
 
   setFormData(model: Dummy): void {
+    this.model = {...model};
     this.form.get('wording').setValue(model.wording);
     this.form.get('description').setValue(model.description);
   }
@@ -123,7 +124,8 @@ export class DummyComponent implements OnInit, AfterViewInit {
 
   private initializeModel(): void {
     this.model = new Dummy();
-    this.form.reset();
+    // this.form.reset();
+    // this.form.get('wording').setValue('');
   }
 
   // HTTP METHODS
@@ -134,9 +136,7 @@ export class DummyComponent implements OnInit, AfterViewInit {
     this.startLoading();
     this.service.create(this.model).subscribe((data: any) => {
       this.model = transformResponseEntity(data) as any;
-      this.loadAll();
-      this.initializeModel();
-      this.showSuccess('Opération effectuée avec succès');
+      this.afterSave();
       this.endLoading();
     }, error => {
       this.showError(error);
@@ -152,9 +152,7 @@ export class DummyComponent implements OnInit, AfterViewInit {
     this.startLoading();
     this.service.update(this.model.id, this.model).subscribe((data: any) => {
       this.model = transformResponseEntity(data) as any;
-      this.loadAll();
-      this.initializeModel();
-      this.showSuccess('Opération effectuée avec succès');
+      this.afterSave();
       this.endLoading();
     }, error => {
       this.showError(error);
@@ -199,5 +197,16 @@ export class DummyComponent implements OnInit, AfterViewInit {
     // doc.className = className + ' reddy';
     // // doc.setAttribute('readonly', 'true');
     // console.log('doc.className === ', doc.className);
+  }
+
+
+  afterSave(): void {
+    this.loadAll();
+    this.model = new Dummy();
+    this.form.reset();
+    Object.keys(this.form.controls).forEach(key => {
+      this.form.get(key).setErrors(null);
+    });
+    this.showSuccess('Opération effectuée avec succès');
   }
 }
