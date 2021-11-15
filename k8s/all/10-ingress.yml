@@ -1,0 +1,34 @@
+---
+### Ingress
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: famoc-ingress
+  namespace: k8s-formation
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: "true"
+  labels:
+    app: k8s-formation-ingress
+    app-name: k8s-formation
+    tier: ingress
+    client-name: caisff
+spec:
+  rules:
+    - host: k8s.formation.mef
+      http:
+        paths:
+          - path: /*
+            pathType: Prefix
+            backend:
+              service:
+                name: k8s-formation-frontend
+                port:
+                  number: 80
+          - path: /test/*
+            pathType: Prefix
+            backend:
+              service:
+                name: k8s-formation-backend
+                port:
+                  number: 80

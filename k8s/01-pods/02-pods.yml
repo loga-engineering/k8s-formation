@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod01
+  labels:
+    app: test
+spec:
+  containers:
+    - name: test-container
+      image: nginx
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod02
+  labels:
+    app: test
+spec:
+  containers:
+    - name: test-container
+      image: nginx

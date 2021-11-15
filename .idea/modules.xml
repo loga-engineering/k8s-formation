@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/backend/demo.iml" filepath="$PROJECT_DIR$/backend/demo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/kaiissf.iml" filepath="$PROJECT_DIR$/.idea/kaiissf.iml" />
+      <module fileurl="file://$PROJECT_DIR$/backend/backend.iml" filepath="$PROJECT_DIR$/backend/backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/k8s-formation.iml" filepath="$PROJECT_DIR$/.idea/k8s-formation.iml" />
     </modules>
   </component>
 </project>

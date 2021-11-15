@@ -1,0 +1,84 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: k8s-formation-backend
+  namespace: k8s-formation
+  labels:
+    app: k8s-formation-backend
+    tier: backend
+    app-name: k8s-formation
+    client-name: caisff
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app: k8s-formation-backend
+    tier: backend
+    app-name: k8s-formation
+    client-name: caisff
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-formation-backend
+  namespace: k8s-formation
+  labels:
+    app: k8s-formation-backend
+    tier: backend
+    app-name: k8s-formation
+    client-name: caisff
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8s-formation-backend
+      tier: backend
+      app-name: k8s-formation
+      client-name: caisff
+  template:
+    metadata:
+      namespace: k8s-formation
+      labels:
+        app: k8s-formation-backend
+        tier: backend
+        app-name: k8s-formation
+        client-name: caisff
+    spec:
+      containers:
+        - name: k8s-formation-backend
+          image: k8s.registry.mef:5000/k8s-formation-backend:0.0.2
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: 320Mi
+              cpu: 10m
+          env:
+            - name: SERVER_PORT
+              value: '80'
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: my-db-config
+                  key: host
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: my-db-config
+                  key: name
+            - name: spring.datasource.username
+              valueFrom:
+                secretKeyRef:
+                  name: my-db-secret
+                  key: username
+            - name: spring.datasource.password
+              valueFrom:
+                secretKeyRef:
+                  name: my-db-secret
+                  key: user_password
+            - name: spring.jpa.hibernate.ddl-auto
+              value: update
+            - name: spring.datasource.url
+              value: jdbc:mysql://${DB_HOST}/${DB_NAME}?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC

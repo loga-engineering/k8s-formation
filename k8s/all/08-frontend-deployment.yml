@@ -1,0 +1,57 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: k8s-formation-frontend
+  namespace: k8s-formation
+  labels:
+    app: k8s-formation-frontend
+    tier: frontend
+    app-name: k8s-formation
+    client-name: caisff
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app: k8s-formation-frontend
+    tier: frontend
+    app-name: k8s-formation
+    client-name: caisff
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-formation-frontend
+  namespace: k8s-formation
+  labels:
+    app: k8s-formation-frontend
+    tier: frontend
+    app-name: k8s-formation
+    client-name: caisff
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8s-formation-frontend
+      tier: frontend
+      app-name: k8s-formation
+      client-name: caisff
+  template:
+    metadata:
+      namespace: k8s-formation
+      labels:
+        app: k8s-formation-frontend
+        tier: frontend
+        app-name: k8s-formation
+        client-name: caisff
+    spec:
+      containers:
+        - name: k8s-formation-frontend
+          image: k8s.registry.mef:5000/k8s-formation-frontend:0.0.2
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: 320Mi
+              cpu: 10m

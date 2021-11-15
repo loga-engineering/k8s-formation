@@ -1,0 +1,57 @@
+-- 01
+kubectl apply -f 01-pod.yml
+
+kubectl get po
+
+kubectl get po -o wide
+
+kubectl describe po my-pod01
+
+kubectl exec -it my-pod01 -- sh
+
+curl localhost
+
+-- 02
+kubectl apply -f 02-pods.yml
+
+kubectl get po -o wide
+
+kubectl delete po my-pod01
+
+kubectl get po -o wide
+
+-- 03
+kubectl describe po my-pod01
+
+kubectl apply -f 03-replicaset.yml
+
+kubectl get rs
+
+kubectl describe po my-pod01
+
+kubectl get po
+
+// Test Pod Adoption (Delete over pod)
+// Update Replica ?
+
+kubectl get po -l app=test
+
+// Aller a 10 po. Voir la repartition des pods sur les workers.
+// Tuer ceertains pods.
+// Revenir a 3. Essayer de creer des pods 02-pods.yml
+// Appliquer 01. voir. Ensuite applique 02 et voir
+
+-- 04
+kubectl apply -f 04-pod-rq-lm.yml
+
+//Aller a 30Gi de RAM comme request et voir.
+
+kubectl get po -o wide
+
+kubectl describe po my-pod01
+
+-- 05
+kubectl apply -f 05-pod-ln-rn-probe.yml
+
+//Ajouter les path au probe '/'(ready) et '/test' (live)
+

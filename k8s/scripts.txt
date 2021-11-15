@@ -1,0 +1,58 @@
+-- Build MVN Backend
+mvn package
+
+-- Build Docker Backend
+docker build -t k8s-formation-backend:0.0.1 .
+
+-- Build Ng Frontend
+npm i
+ng build --prod --output-hashing=all
+docker build -t k8s-formation-frontend:0.0.1 .
+
+-- Build Docker Nginx
+docker build -t k8s-formation-nginx .
+
+-- Create PV and PVC
+kubectl apply -f 01-persistent-volume.yaml
+kubectl apply -f 02-persistent-volume-claim.yaml
+
+kubectl get pv
+kubectl get pvc
+
+-- Create DB ConfigMap and Secret
+kubectl apply -f 03-db-config.yml
+kubectl apply -f 04-db-secrets.yml
+
+kubectl get cm
+kubectl get secret
+
+-- Create DB StatefullSet
+kubectl apply -f 05-db-sts.yml
+
+-- Create DB Service
+kubectl apply -f 06-db-service.yml
+
+kubectl port-forward svc/my-db-service 3320:3306
+
+-- Tag and Push docker Images
+docker tag k8s-formation-backend:0.0.1 k8s.registry.mef:5000/k8s-formation-backend:0.0.2
+docker tag k8s-formation-frontend:0.0.1 k8s.registry.mef:5000/k8s-formation-frontend:0.0.2
+
+docker push k8s.registry.mef:5000/k8s-formation-backend:0.0.2
+docker push k8s.registry.mef:5000/k8s-formation-frontend:0.0.2
+
+-- Deploy Backend
+kubectl apply -f 07-backend-deployment.yml
+
+-- Deploy Frontend
+kubectl apply -f 08-frontend-deployment.yml
+
+
+-- Install Ingress Controller
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.0.4/deploy/static/provider/baremetal/deploy.yaml
+
+-- Set default namespace
+kubectl config set-context --current --namespace=k8s-formation
+
+-- Install Metric server
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml

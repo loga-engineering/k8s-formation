@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: my-db-sts
+  namespace: k8s-formation
+  labels:
+    app: test
+    tier: database
+spec:
+  replicas: 1
+  serviceName: my-db-service
+  selector:
+    matchLabels:
+      app: test
+      tier: database
+  template:
+    metadata:
+      namespace: k8s-formation
+      labels:
+        app: test
+        tier: database
+    spec:
+      containers:
+        - image: mysql/mysql-server:8.0
+          name: test-db
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: my-db-secret
+                  key: root_password
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: my-db-secret
+                  key: username
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: my-db-secret
+                  key: user_password
+            - name: MYSQL_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: my-db-config
+                  key: name
+          ports:
+            - containerPort: 3306
+              name: mysql
+          volumeMounts:
+            - name: my-volume
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: my-volume
+          persistentVolumeClaim:
+            claimName: my-pvc
