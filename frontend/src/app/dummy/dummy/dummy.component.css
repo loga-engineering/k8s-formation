@@ -1,6 +1,6 @@
 .sng-mat-row {
   position: relative;
-  cursor: pointer;
+  /*cursor: pointer;*/
   height: 40px !important;
 }
 
@@ -147,4 +147,9 @@ mat-form-field {
   width: auto;
   margin-right: 29px;
   text-align:center;
+}
+
+mat-cell:last-of-type, mat-header-cell:last-of-type, mat-footer-cell:last-of-type {
+  display: flex;
+  justify-content: end;
 }
