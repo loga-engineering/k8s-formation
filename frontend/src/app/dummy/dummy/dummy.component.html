@@ -1,12 +1,18 @@
 <ngx-loading [show]="sngLoadingIndicator"></ngx-loading>
 
-<div class="container-principal">
+<div class="nav-bar mat-card">
   <div class="logo">
     <img src="assets/image/loga.png">
   </div>
+  <div class="k8s">
+    K8s- formation
+  </div>
+</div>
+
+<div class="container-principal">
 
   <div class="container">
-    <div class="sng-form-container mat-card" id="form-id">
+    <div class="sng-form-container mat-card" id="form-id" [ngStyle]="{display: listView ? 'none': 'block'}">
       <form [formGroup]="form" name="form">
 
         <mat-form-field appearance="outline">
@@ -42,7 +48,7 @@
 
     </div>
 
-    <div class="sng-list-container mat-card">
+    <div class="sng-list-container mat-card" [ngStyle]="{width: listView ? '100%': '65%'}">
 
       <div class="map-options">
         <div class="search-wrapper mx-32 mx-md-0 search-box search-menus">
@@ -53,9 +59,15 @@
         </div>
 
         <div>
-          <button mat-raised-button (click)="goToForm()"
-                  matTooltip="Ajouter utilisateur">
+          <button mat-raised-button (click)="goToForm()" *ngIf="listView"
+                  matTooltip="Ajouter">
             <i class="material-icons">add</i> Ajouter
+          </button>
+
+          <button mat-raised-button (click)="listView = true"
+                  *ngIf="!listView"
+                  matTooltip="Plein ecran">
+            <i class="material-icons">zoom_out_map</i> Plein ecran
           </button>
           &nbsp;
           <button mat-raised-button class="btn-refresh" (click)="loadAll()"
