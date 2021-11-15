@@ -60,14 +60,10 @@ export class DummyComponent implements OnInit, AfterViewInit {
     this.datasource.paginator = this.paginator;
   }
 
-  goToForm(): void {
-    this.showFormPanel();
-  }
-
   showEdit(model: Dummy): void {
     // this.lsf.navigateTo('form?id=' + model.id);
     this.setFormData(model);
-    this.showFormPanel();
+    this.listView = false;
   }
 
   setFormData(model: Dummy): void {
@@ -77,12 +73,24 @@ export class DummyComponent implements OnInit, AfterViewInit {
   }
 
   loadAll(): void {
+    this.startLoading();
     this.service.findAll().subscribe(data => {
       const entities = Helpers.getOthers(data);
       console.log('this.entities ==> ', entities);
       this.datasource.data = entities;
+      this.endLoading();
+    }, error => {
+      this.showError(error);
+      this.endLoading();
     });
   }
+
+  // NINA
+  // RCCN REGISTRE DU COMMERCE
+  // NIF N° D'ide fiscal'
+  // ATC ISO CERTIFIE 9001
+  // SOMISY
+  // RESOLUTE australienne
 
   delete(model: Dummy, msg?: string): void {
     msg = 'Voulez vous vraiment supprimer ' + msg;
@@ -91,7 +99,7 @@ export class DummyComponent implements OnInit, AfterViewInit {
       this.startLoading();
       this.service.delete(model.id).subscribe(value => {
         console.log('parent delete ok');
-        this.loadAll();
+        this.afterSave();
         this.endLoading();
         this.showSuccess('Supprimé avec succès');
       }, error => {
@@ -124,8 +132,6 @@ export class DummyComponent implements OnInit, AfterViewInit {
 
   private initializeModel(): void {
     this.model = new Dummy();
-    // this.form.reset();
-    // this.form.get('wording').setValue('');
   }
 
   // HTTP METHODS
@@ -186,27 +192,20 @@ export class DummyComponent implements OnInit, AfterViewInit {
     this.sngLoadingIndicator = false;
   }
 
-  private showFormPanel(): void {
-    // // const x = document.getElementsByClassName('sng-form-container').item(0);
-    // // x.className = 'animate.min.css';
-    //
-    // const doc = document.getElementById('form-id');
-    // const className = doc.className;
-    // console.log('className === ', className);
-    // // doc.className = 'animate__slideInDown';
-    // doc.className = className + ' reddy';
-    // // doc.setAttribute('readonly', 'true');
-    // console.log('doc.className === ', doc.className);
-  }
-
-
   afterSave(): void {
     this.loadAll();
     this.model = new Dummy();
-    this.form.reset();
-    Object.keys(this.form.controls).forEach(key => {
-      this.form.get(key).setErrors(null);
-    });
+    // this.form.reset();
+    // Object.keys(this.form.controls).forEach(key => {
+    //   this.form.get(key).markAsPristine();
+    // });
+
+    this.buildForm();
+    this.subscribe();
     this.showSuccess('Opération effectuée avec succès');
+  }
+
+  goToForm(): void {
+    this.listView = false;
   }
 }
