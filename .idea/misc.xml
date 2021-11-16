@@ -8,6 +8,7 @@
       <list>
         <option value="$PROJECT_DIR$/backend/pom.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/k8s-test01/pom.xml" />
       </list>
     </option>
   </component>
