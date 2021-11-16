@@ -56,3 +56,4 @@ kubectl config set-context --current --namespace=k8s-formation
 
 -- Install Metric server
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+
