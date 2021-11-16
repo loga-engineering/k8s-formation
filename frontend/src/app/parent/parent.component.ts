@@ -4,51 +4,52 @@ import {LifeSaverService} from '../SngUtils/lifesaver.service';
 
 export abstract class ParentComponent<T extends ParentEntity> {
 
-    rights: string[];
-    listPanel: boolean;
-    formPanel: boolean;
-    invoiceIndicator: boolean;
-    totalElements: any;
-    deleteConfirmationMessage = 'Voulez vous vraiment supprimer cet element?';
-    loading: boolean;
+  rights: string[];
+  listPanel: boolean;
+  formPanel: boolean;
+  invoiceIndicator: boolean;
+  totalElements: any;
+  deleteConfirmationMessage = 'Voulez vous vraiment supprimer cet element?';
+  loading: boolean;
 
-    now: Date = new Date();
-    sngLoadingIndicator: boolean;
-    // ROLEMAP = ROLEMAP;
+  now: Date = new Date();
+  sngLoadingIndicator: boolean;
 
-    constructor(protected lsf: LifeSaverService) {
-    }
+  // ROLEMAP = ROLEMAP;
 
-    compareById(ob1, ob2) {
-        return ob1.id === ob2.id;
-    }
+  constructor(protected lsf: LifeSaverService) {
+  }
 
-    ddMMyyyy(date: Date) {
-        return moment(date).format('L');
-    }
+  compareById(ob1, ob2) {
+    return ob1.id === ob2.id;
+  }
 
-    currentTime() {
-        return moment(new Date()).format('LTS');
-    }
+  ddMMyyyy(date: Date) {
+    return moment(date).format('L');
+  }
 
-    startLoading() {
-        this.sngLoadingIndicator = true;
-    }
+  currentTime() {
+    return moment(new Date()).format('LTS');
+  }
 
-    endLoading() {
-        this.sngLoadingIndicator = false;
-    }
+  startLoading() {
+    this.sngLoadingIndicator = true;
+  }
 
-    currency(value: any, devise?: string) {
-        const cur = devise === 'EURO' ? 'EUR' : devise === 'DOLLAR' ? 'USD' : 'XOF';
-        return new Intl.NumberFormat('fr-FR', {
-            style: 'currency',
-            currency: cur
-        }).format(value);
-    }
+  endLoading() {
+    this.sngLoadingIndicator = false;
+  }
 
-    navigate(url: string) {
-        this.lsf.navigateTo(url);
-    }
+  currency(value: any, devise?: string) {
+    const cur = devise === 'EURO' ? 'EUR' : devise === 'DOLLAR' ? 'USD' : 'XOF';
+    return new Intl.NumberFormat('fr-FR', {
+      style: 'currency',
+      currency: cur
+    }).format(value);
+  }
+
+  navigate(url: string) {
+    this.lsf.navigateTo(url);
+  }
 
 }

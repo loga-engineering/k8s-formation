@@ -12,14 +12,14 @@ import java.util.List;
 
 public interface DummyRepository extends JpaRepository<Dummy, Long> {
 
-   Dummy findByWording(String name);
+    Dummy findByWording(String name);
 
-   @Query("Select dummy from Dummy as dummy where dummy.wording like %:wording% or "
-           + "dummy.description like %:wording%")
-   Page<Dummy> customSearch(@Param("wording") String wording, Pageable pageable);
+    @Query("Select dummy from Dummy as dummy where dummy.wording like %:wording% or "
+            + "dummy.description like %:wording%")
+    Page<Dummy> customSearch(@Param("wording") String wording, Pageable pageable);
 
-   @Query("select dummy From Dummy as dummy order by dummy.createdDate desc ")
-   List<Dummy> findAllOrderByCreatedDate();
+    @Query("select dummy From Dummy as dummy order by dummy.createdDate desc ")
+    List<Dummy> findAllOrderByCreatedDate();
 
 }
 

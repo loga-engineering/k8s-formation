@@ -7,14 +7,14 @@ import {UserContextService} from './shared/user-context.service';
 @Injectable()
 export class CustomHttpInterceptor implements HttpInterceptor {
 
-    constructor(public userContextService: UserContextService) {
-    }
+  constructor(public userContextService: UserContextService) {
+  }
 
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        console.log('intercepted')
-        req = req.clone({
-            setHeaders: {Authorization: `Bearer ${this.userContextService.token}`},
-        });
-        return next.handle(req);
-    }
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    console.log('intercepted')
+    req = req.clone({
+      setHeaders: {Authorization: `Bearer ${this.userContextService.token}`},
+    });
+    return next.handle(req);
+  }
 }

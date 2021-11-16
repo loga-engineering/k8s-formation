@@ -4,44 +4,44 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common'
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class LifeSaverService {
 
-    constructor(
-        protected location: Location,
-        private customMatService: CustomMatService,
-        protected router: Router,
-        protected route: ActivatedRoute) {
-    }
+  constructor(
+    protected location: Location,
+    private customMatService: CustomMatService,
+    protected router: Router,
+    protected route: ActivatedRoute) {
+  }
 
-    getRouter(): any {
-        return this.router;
-    }
+  getRouter(): any {
+    return this.router;
+  }
 
-    getLocation(): Location {
-        return this.location;
-    }
+  getLocation(): Location {
+    return this.location;
+  }
 
 
-    getCustomMatService(): CustomMatService {
-        return this.customMatService;
-    }
+  getCustomMatService(): CustomMatService {
+    return this.customMatService;
+  }
 
-    getRouteParamQuery(key: string): any {
-        console.log(this.route.snapshot)
-        return this.route.snapshot.queryParams[key];
-    }
+  getRouteParamQuery(key: string): any {
+    console.log(this.route.snapshot)
+    return this.route.snapshot.queryParams[key];
+  }
 
-    getRouteParam(key: string): any {
-        return this.route.snapshot.params[key];
-    }
+  getRouteParam(key: string): any {
+    return this.route.snapshot.params[key];
+  }
 
-    navigateTo(url: string) {
-        this.router.navigateByUrl(url);
-    }
+  navigateTo(url: string) {
+    this.router.navigateByUrl(url);
+  }
 
-    navigateBack() {
-        this.location.back();
-    }
+  navigateBack() {
+    this.location.back();
+  }
 }

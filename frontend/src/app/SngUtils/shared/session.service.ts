@@ -1,25 +1,25 @@
 import {Injectable} from '@angular/core';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class SessionService {
 
-    setItem(key: string, value: any) {
-        sessionStorage.setItem(key, JSON.stringify(value));
-    }
+  setItem(key: string, value: any) {
+    sessionStorage.setItem(key, JSON.stringify(value));
+  }
 
-    getItem(key: string): any {
-        const value = sessionStorage.getItem(key);
-        return JSON.parse(value);
-    }
+  getItem(key: string): any {
+    const value = sessionStorage.getItem(key);
+    return JSON.parse(value);
+  }
 
-    removeItem(key: string) {
-        sessionStorage.removeItem(key);
-    }
+  removeItem(key: string) {
+    sessionStorage.removeItem(key);
+  }
 
-    clear() {
-        sessionStorage.clear();
-    }
+  clear() {
+    sessionStorage.clear();
+  }
 
 }

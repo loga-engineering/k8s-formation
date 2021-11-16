@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-config-map
+data:
+  key1: value1
+  key2: value2
+  key3: value3 value3 value3 value3
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod01
+spec:
+  containers:
+    - name: test-container
+      image: nginx
+      env:
+        - name: ENV1
+          value: ENV1
+        - name: ENV_KEY1
+          valueFrom:
+            configMapKeyRef:
+              name: my-config-map
+              key: key1
+        - name: ENV_KEY2
+          valueFrom:
+            configMapKeyRef:
+              name: my-config-map
+              key: key2
+        - name: ENV_KEY3
+          valueFrom:
+            configMapKeyRef:
+              name: my-config-map
+              key: key3

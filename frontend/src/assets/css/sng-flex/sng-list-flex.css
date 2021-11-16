@@ -1,68 +1,68 @@
 #wrapper {
-    display: block;
-    margin: 0 auto;
-    padding: 10px 17px 0 17px;
-    background: #0b3263;
-    float: left;
-    position: relative;
-    width: 98%;
-    margin: 1%;
-    background: #fff;
-    color: rgba(0, 0, 0, 0.87);
-    border-radius: 5px;
-    padding: 10px;
-    border: 1px solid #dedede;
+  display: block;
+  margin: 0 auto;
+  padding: 10px 17px 0 17px;
+  background: #0b3263;
+  float: left;
+  position: relative;
+  width: 98%;
+  margin: 1%;
+  background: #fff;
+  color: rgba(0, 0, 0, 0.87);
+  border-radius: 5px;
+  padding: 10px;
+  border: 1px solid #dedede;
 }
 
 .wrapper {
-    display: block;
-    margin: 0 auto;
-    padding: 10px 17px 0 17px;
-    background: #0b3263;
-    float: left;
-    position: relative;
-    width: 98%;
-    margin: 1%;
-    background: #fff;
-    color: rgba(0, 0, 0, 0.87);
-    border-radius: 5px;
-    padding: 10px;
-    border: 1px solid #dedede;
+  display: block;
+  margin: 0 auto;
+  padding: 10px 17px 0 17px;
+  background: #0b3263;
+  float: left;
+  position: relative;
+  width: 98%;
+  margin: 1%;
+  background: #fff;
+  color: rgba(0, 0, 0, 0.87);
+  border-radius: 5px;
+  padding: 10px;
+  border: 1px solid #dedede;
 }
 
 .keywords {
-    margin: 0 auto;
-    border: 0;
-    float: left;
-    position: relative;
-    width: 100%;
+  margin: 0 auto;
+  border: 0;
+  float: left;
+  position: relative;
+  width: 100%;
 }
 
 .keywords tr:nth-child(even) {
-    background-color: #f5f7f8;
+  background-color: #f5f7f8;
 }
 
 .keywords thead {
-    cursor: pointer;
-    background: #f5f7f8;
+  cursor: pointer;
+  background: #f5f7f8;
 }
 
 .keywords thead tr th {
-    font-weight: bold;
-    padding: 12px 30px;
-    padding-left: 42px;
+  font-weight: bold;
+  padding: 12px 30px;
+  padding-left: 42px;
 }
 
 .keywords thead tr th span {
-    padding-right: 20px;
-    background-repeat: no-repeat;
-    background-position: 100% 100%;
+  padding-right: 20px;
+  background-repeat: no-repeat;
+  background-position: 100% 100%;
 }
 
 .keywords tbody tr td {
-    text-align: center;
-    padding: 2px;
-    border: 1px solid #d5d5d5;
+  text-align: center;
+  padding: 2px;
+  border: 1px solid #d5d5d5;
 }
 
 /*
@@ -71,70 +71,70 @@ END STYLING list of models
 
 
 .sng-dropdown-menu {
-    width: 100%;
-    min-width: 100%;
-    max-width: 100%;
-    height: 100%;
-    min-height: 100%;
-    max-height: 100%;
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  height: 100%;
+  min-height: 100%;
+  max-height: 100%;
 }
 
 .sng-dropdown-menu {
-    width: 100%;
-    min-width: 100%;
-    max-width: 100%;
-    height: 100%;
-    min-height: 100%;
-    max-height: 100%;
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  height: 100%;
+  min-height: 100%;
+  max-height: 100%;
 }
 
 .icon-container {
-    padding: 15px 26px;
-    background: #4752b1;
-    border-radius: 2px;
-    position: absolute;
-    top: 17%;
+  padding: 15px 26px;
+  background: #4752b1;
+  border-radius: 2px;
+  position: absolute;
+  top: 17%;
 }
 
 .sng-flex-container {
-    float: left;
-    position: relative;
-    width: 100%;
-    height: 150px;
-    margin: 2% 0 0;
-    display: flex;
-    flex-wrap: wrap;
+  float: left;
+  position: relative;
+  width: 100%;
+  height: 150px;
+  margin: 2% 0 0;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .sng-flex-block {
-    height: 100%;
-    width: 23.7%;
-    min-width: 277px;
-    margin: 0.5% 0.5%;
-    border-radius: 1px;
-    padding: 15px;
-    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
-    background: #fff;
-    float: left;
-    position: relative;
-    cursor: pointer;
+  height: 100%;
+  width: 23.7%;
+  min-width: 277px;
+  margin: 0.5% 0.5%;
+  border-radius: 1px;
+  padding: 15px;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+  background: #fff;
+  float: left;
+  position: relative;
+  cursor: pointer;
 }
 
 .sng-flex-block table {
-    height: 100%;
-    width: 100%;
+  height: 100%;
+  width: 100%;
 }
 
 .sng-flex-block table td {
-    text-align: right;
-    height: 100%;
-    width: 100%;
+  text-align: right;
+  height: 100%;
+  width: 100%;
 }
 
 
 .sng-flex-block table tr:nth-child(odd) {
-    font-size: 15px !important;
-    height: 25%;
+  font-size: 15px !important;
+  height: 25%;
 }
 
 /*.sng-flex-block table tr:nth-child(even) {
@@ -144,136 +144,136 @@ END STYLING list of models
 }*/
 
 .sng-flex-block table td:nth-child(odd) {
-    font-size: 20px !important;
-    font-weight: bold;
-    width: 35%;
+  font-size: 20px !important;
+  font-weight: bold;
+  width: 35%;
 }
 
 .sng-flex-block table td:nth-child(even) {
-    font-size: 20px !important;
-    font-weight: bold;
+  font-size: 20px !important;
+  font-weight: bold;
 }
 
 .dropdown-table {
-    width: 100%;
-    padding: 0;
-    height: 100%;
+  width: 100%;
+  padding: 0;
+  height: 100%;
 }
 
 .dropdown-item2 {
-    margin: 0;
-    padding: 0;
-    height: 43px;
-    width: 214px;
-    font-size: 14px;
-    color: #0b3263;
-    cursor: pointer;
+  margin: 0;
+  padding: 0;
+  height: 43px;
+  width: 214px;
+  font-size: 14px;
+  color: #0b3263;
+  cursor: pointer;
 }
 
 .dropdown-item2 .material-icons {
-    font-family: 'Material Icons';
-    font-weight: normal;
-    font-style: normal;
-    font-size: 24px; /* Preferred icon size */
-    display: inline-block;
-    line-height: 1;
-    text-transform: none;
-    letter-spacing: normal;
-    word-wrap: normal;
-    white-space: nowrap;
-    direction: ltr;
-    height: 24px;
-    /* Support for all WebKit browsers. */
-    -webkit-font-smoothing: antialiased;
-    /* Support for Safari and Chrome. */
-    text-rendering: optimizeLegibility;
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px; /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  height: 24px;
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
 
-    /* Support for Firefox. */
-    -moz-osx-font-smoothing: grayscale;
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
 
-    /* Support for IE. */
-    font-feature-settings: 'liga';
+  /* Support for IE. */
+  font-feature-settings: 'liga';
 }
 
 dropdown-table {
-    border: none;
+  border: none;
 }
 
 dropdown-table tr, td {
-    border: none;
+  border: none;
 }
 
 .dropdown-table td:nth-child(even) {
-    padding: 0;
-    margin: 0;
-    width: 10%;
+  padding: 0;
+  margin: 0;
+  width: 10%;
 }
 
 .dropdown-table td:nth-child(even) {
-    padding: 0;
-    text-align: left;
-    width: 90%;
-    color: #0b3263;
+  padding: 0;
+  text-align: left;
+  width: 90%;
+  color: #0b3263;
 }
 
 
 .content-section button {
-    padding: 10px;
+  padding: 10px;
 }
 
 .search-box {
-    height: 58px;
+  height: 58px;
 }
 
 .search-box mat-form-field {
-    width: 30%;
+  width: 30%;
 }
 
 .sng-2-matfield {
-    width: 100%;
+  width: 100%;
 }
 
 .sng-2-matfield mat-form-field {
-    width: 49%;
+  width: 49%;
 }
 
 .sng-2-matfield mat-form-field:nth-child(odd) {
-    margin-right: 2%;
+  margin-right: 2%;
 }
 
 mat-accordion {
-    background: black;
+  background: black;
 }
 
 .lined-separator {
-    clear: both;
-    display: block;
-    height: 1px;
-    margin: 1px auto;
-    background: #efefef;
-    width: 98%;
-    border-radius: 2px;
+  clear: both;
+  display: block;
+  height: 1px;
+  margin: 1px auto;
+  background: #efefef;
+  width: 98%;
+  border-radius: 2px;
 }
 
 .simple-separator {
-    clear: both;
-    display: block;
-    height: 1px;
-    margin: 0.5px auto;
-    width: 98%;
+  clear: both;
+  display: block;
+  height: 1px;
+  margin: 0.5px auto;
+  width: 98%;
 }
 
 .list-menu {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .list-menu .list-menu-btns {
-    float: left;
+  float: left;
 }
 
 .list-menu .list-menu-search {
-    text-align: right;
-    padding-bottom: 5px;
+  text-align: right;
+  padding-bottom: 5px;
 }
 
 

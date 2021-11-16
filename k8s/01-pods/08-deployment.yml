@@ -1,7 +1,7 @@
 apiVersion: apps/v1
-kind: ReplicaSet
+kind: Deployment
 metadata:
-  name: my-replicaset01
+  name: my-deployment01
   labels:
     app: test
 spec:

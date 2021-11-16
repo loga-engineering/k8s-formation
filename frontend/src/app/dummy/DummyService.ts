@@ -4,23 +4,23 @@ import {ParentService} from '../parent/ParentService';
 import {Dummy} from './dummy';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class DummyService extends ParentService<Dummy> {
 
-    protected static get baseOption() {
-        const _headers = new HttpHeaders({
-            'Content-Type': 'application/json'
-        });
-        return {headers: _headers};
-    }
+  protected static get baseOption() {
+    const _headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return {headers: _headers};
+  }
 
-    constructor(protected httpClient: HttpClient) {
-        super(httpClient);
-    }
+  constructor(protected httpClient: HttpClient) {
+    super(httpClient);
+  }
 
-    protected address(): string {
-        return '/dummies';
-    }
+  protected address(): string {
+    return '/dummies';
+  }
 
 }

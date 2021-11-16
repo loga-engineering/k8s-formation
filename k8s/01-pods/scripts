@@ -55,3 +55,48 @@ kubectl apply -f 05-pod-ln-rn-probe.yml
 
 //Ajouter les path au probe '/'(ready) et '/test' (live)
 
+//Augmenter le test d'echec
+
+-- 06
+kubectl apply -f 06-pod-cm-secret.yml
+
+// Creer le cm
+// Ajouter env from config map
+
+kubectl exec -it pod/my-pod01 -- sh
+
+echo $ENV1
+echo $ENV_KEY1
+
+-- 06p
+kubectl apply -f 06p-pod-cm.yml
+
+kubectl exec -it pod/my-pod01 -- sh
+
+-- 07
+kubectl apply -f 07-pod-secret.yml
+
+kubectl exec -it pod/my-pod01 -- sh
+
+echo $ENV_KEY3
+
+cat /test/config/config.txt
+
+-- 08
+kubectl get rs
+
+kubectl describe rs my-replicaset01
+
+kubectl apply -f 08-deployment.yml
+
+kubectl get deploy
+
+kubectl get rs // Le replicaset du deployment a adopte tous les pods de l'ancien replicaset
+
+kubectl delete rs my-replicaset01
+
+kubectl get rs
+
+kubekubectl delete rs my-deployment01-<uid>
+
+kubectl get rs
