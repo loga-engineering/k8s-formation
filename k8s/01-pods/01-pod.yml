@@ -2,7 +2,21 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: my-pod01
+  labels:
+    app: test
 spec:
   containers:
-    - name: test-container
+    - name: my-container-01
       image: nginx
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service01
+spec:
+  type: NodePort
+  selector:
+    app: test
+  ports:
+    - port: 80
+      targetPort: 80

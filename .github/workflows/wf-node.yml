@@ -1,0 +1,39 @@
+# This workflow will build a package using Maven and then publish it to GitHub packages when a release is created
+# For more information see: https://github.com/actions/setup-java#apache-maven-with-a-settings-path
+
+
+name: Backend Docker Images for Kunpan
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag_version:
+        description: 'La version'
+        required: true
+
+env:
+
+  GITHUB_DOCKER_REGISTRY: docker.pkg.github.com
+  ORGAISATION_NAME: loga-engineering
+  DOCKER_REPO_NAME: loga-docker-images
+  BACKEND_DIR: k8s-node01
+  BACKEND_PACKAGE_NAME: k8s-node
+
+jobs:
+
+  build-server:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: Push Docker to GitHub Packages
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.GH_PKG_USERNAME }}
+          password: ${{ secrets.GH_PKG_TOKEN }}
+          registry: ${{ env.GITHUB_DOCKER_REGISTRY }}
+          repository: ${{ env.ORGAISATION_NAME }}/${{ env.DOCKER_REPO_NAME }}/${{ env.BACKEND_PACKAGE_NAME }}
+          path: ${{ env.BACKEND_DIR }}/
+          dockerfile: ${{ env.BACKEND_DIR }}/Dockerfile
+          tags: ${{ github.event.inputs.tag_version }}, latest

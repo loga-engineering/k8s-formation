@@ -102,6 +102,8 @@ kubekubectl delete rs my-deployment01-<uid>
 kubectl get rs
 
 // Les rollout
+kubectl rollout --help (-h)
+
 kubectl rollout history deployment/<deploy>
 
 kubectl rollout undo deployment/<deploy>

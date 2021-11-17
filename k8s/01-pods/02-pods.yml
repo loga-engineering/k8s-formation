@@ -8,7 +8,6 @@ spec:
   containers:
     - name: test-container
       image: nginx
-
 ---
 apiVersion: v1
 kind: Pod

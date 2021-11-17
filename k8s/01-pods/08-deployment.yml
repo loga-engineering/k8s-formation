@@ -4,15 +4,19 @@ metadata:
   name: my-deployment01
   labels:
     app: test
+    app.kubernetes.io/version: "1.19"
+#    app.kubernetes.io/version: 1.19
+#    app.kubernetes.io/version: 1.19
 spec:
   replicas: 3
-#  progressDeadlineSeconds: 2
+#  replicas: 20
 #  minReadySeconds: 2
-#  strategy:
-#    type: RollingUpdate
-#    rollingUpdate:
-#      maxSurge: 1
-#      maxUnavailable: 1
+#  progressDeadlineSeconds: 4
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
   selector:
     matchLabels:
       app: test
@@ -24,5 +28,6 @@ spec:
     spec:
       containers:
         - name: test-container
-          image: nginx
-
+          image: nginx:1.19
+#          image: nginx:1.20
+#          image: nginx:1.21

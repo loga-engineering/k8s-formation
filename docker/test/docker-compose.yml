@@ -1,0 +1,37 @@
+## YAML Template.
+version: '3'
+services:
+  ## Data base Setup
+  node:
+    image: test-node
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'k8s_formation_db'
+      MYSQL_USER: 'k8s_formation_user'
+      MYSQL_PASSWORD: 'k8s-formation@2021'
+      MYSQL_ROOT_PASSWORD: 'k8s-formation@2021'
+    ports:
+      - "8090:8090"
+    expose:
+      - "8090"
+    networks:
+      - k8s_formation_ntw
+
+  ## Backend Setup
+  spring:
+    image: test-spring
+    restart: always
+    environment:
+      spring.datasource.tomcat.max-active: 5000
+      spring.datasource.tomcat.min-idle: 8
+
+    ports:
+      - "8080:8080"
+    expose:
+      - "8080"
+    networks:
+      - k8s_formation_ntw
+
+networks:
+  k8s_formation_ntw:
+
