@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/test")
@@ -17,6 +19,16 @@ public class TestController {
 
     @Value("${secret.env1}")
     private String secretEnv1;
+
+    @GetMapping
+    public Map<String, String> all() {
+        Map<String, String> json = new HashMap<>();
+        json.put("version", version());
+        json.put("hostname", hostname());
+        json.put("configEnv1", configEnv1());
+        json.put("secretEnv1", secretEnv1());
+        return json;
+    }
 
     @GetMapping("version")
     public String version() {
