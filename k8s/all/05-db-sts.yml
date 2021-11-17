@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: my-db-sts
-  namespace: k8s-formation
+  #namespace: k8s-formation
   labels:
     app: test
     tier: database
@@ -15,7 +15,7 @@ spec:
       tier: database
   template:
     metadata:
-      namespace: k8s-formation
+      #namespace: k8s-formation
       labels:
         app: test
         tier: database
@@ -50,7 +50,25 @@ spec:
           volumeMounts:
             - name: my-volume
               mountPath: /var/lib/mysql
-      volumes:
-        - name: my-volume
-          persistentVolumeClaim:
-            claimName: my-pvc
+  volumeClaimTemplates:
+    - metadata:
+        name: my-volume
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-db-service
+spec:
+  selector:
+    app: test
+    tier: database
+  ports:
+    - port: 3306
+      targetPort: 3306

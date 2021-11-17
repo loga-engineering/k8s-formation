@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: my-db-config
-  namespace: k8s-formation
+#  namespace: k8s-formation
 data:
   host: my-db-service
   name: my-db
