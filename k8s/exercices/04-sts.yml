@@ -1,0 +1,91 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: my-db-secret
+data:
+  username: bXktdXNlcg==
+  user_password: bXktdXNlci1wYXNzd29yZA==
+  root_password: bXktYWRtaW4tcGFzc3dvcmQ=
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-db-config
+data:
+  host: my-db-service
+  name: my-db
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-db-service
+spec:
+  selector:
+    app: test
+    tier: database
+  ports:
+    - port: 3306
+      targetPort: 3306
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: my-db-sts
+  labels:
+    app: test
+    tier: database
+spec:
+  replicas: 2
+  serviceName: my-db-service
+  selector:
+    matchLabels:
+      app: test
+      tier: database
+  template:
+    metadata:
+      labels:
+        app: test
+        tier: database
+    spec:
+      containers:
+        - image: mysql/mysql-server:8.0
+          name: test-db
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: my-db-secret
+                  key: root_password
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: my-db-secret
+                  key: username
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: my-db-secret
+                  key: user_password
+            - name: MYSQL_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: my-db-config
+                  key: name
+          ports:
+            - containerPort: 3306
+              name: mysql
+          volumeMounts:
+            - name: my-volume
+              mountPath: /var/lib/mysql
+  volumeClaimTemplates:
+    - metadata:
+        name: my-volume
+        labels:
+          app: test
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+
