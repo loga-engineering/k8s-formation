@@ -1,11 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-config
+data:
+  key1: FROM CONFIG MAP
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: my-spring-deploy
+  annotations:
+    kubernetes.io/change-cause: 'Mise a jour livenessProbe v0.0.3'
   labels:
     app: my-deploy
 spec:
-  replicas: 1
+  replicas: 4
+  revisionHistoryLimit: 5
+  minReadySeconds: 2
+  progressDeadlineSeconds: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
   selector:
     matchLabels:
       app: my-pod
@@ -19,16 +35,52 @@ spec:
     spec:
       containers:
         - name: my-spring-pod
-          image: k8s-spring:0.0.1
+          image: k8s-spring:0.0.3
+          livenessProbe:
+            httpGet:
+              port: 8080
+              path: /test
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            failureThreshold: 6
+          readinessProbe:
+            httpGet:
+              port: 8080
+              path: /test
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            failureThreshold: 6
+          resources:
+            requests:
+              cpu: 10m
+              memory: '350Mi'
+            limits:
+              cpu: 500m
+              memory: '650Mi'
+          env:
+            - name: CONFIG_ENV1
+              valueFrom:
+                configMapKeyRef:
+                  name: my-config
+                  key: key1
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: my-node-deploy
+  annotations:
+    kubernetes.io/change-cause: 'Mise a jour livenessProbe v0.0.3'
   labels:
     app: my-deploy
 spec:
-  replicas: 1
+  replicas: 4
+  revisionHistoryLimit: 5
+  minReadySeconds: 2
+  progressDeadlineSeconds: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
   selector:
     matchLabels:
       app: my-pod
@@ -42,10 +94,33 @@ spec:
     spec:
       containers:
         - name: my-node-pod
-          image: k8s-node:0.0.1
+          image: k8s-node:0.0.3
+          livenessProbe:
+            httpGet:
+              port: 8080
+              path: /test
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            failureThreshold: 6
+          readinessProbe:
+            httpGet:
+              port: 8080
+              path: /test
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            failureThreshold: 6
+          resources:
+            requests:
+              cpu: 10m
+              memory: '350Mi'
+            limits:
+              cpu: 500m
+              memory: '650Mi'
           env:
             - name: SERVER_PORT
               value: '8080'
+            - name: CONFIG_ENV1
+              value: 'FROM YAML'
 ---
 apiVersion: v1
 kind: Service

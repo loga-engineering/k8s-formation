@@ -4,6 +4,7 @@ const os = require('os');
 const testRouter = Router();
 
 testRouter.get('/', (req, res) => {
+    console.log('Check ---', new Date()),
     res.json({
         version: version(),
         hostname: hostname(),
@@ -28,7 +29,7 @@ testRouter.get('/secretEnv1', (req, res) => {
     res.send(secretEnv1());
 });
 
-const version = () => 'v0.0.1';
+const version = () => 'v0.0.3';
 const hostname = () => os.hostname();
 const configEnv1 = () => process.env.CONFIG_ENV1;
 const secretEnv1 = () => process.env.SECRET_ENV1;

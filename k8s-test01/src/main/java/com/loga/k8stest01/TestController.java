@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,6 +23,7 @@ public class TestController {
 
     @GetMapping
     public Map<String, String> all() {
+        System.out.println("---- Check " + new Date());
         Map<String, String> json = new HashMap<>();
         json.put("version", version());
         json.put("hostname", hostname());
@@ -32,7 +34,7 @@ public class TestController {
 
     @GetMapping("version")
     public String version() {
-        return "v0.0.1";
+        return "v0.0.3";
     }
 
     @GetMapping("hostname")
