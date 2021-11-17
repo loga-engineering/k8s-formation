@@ -12,10 +12,10 @@ import java.net.UnknownHostException;
 @RequestMapping("/test")
 public class TestController {
 
-    @Value("${test.config.env1}")
+    @Value("${config.env1}")
     private String configEnv1;
 
-    @Value("${test.secret.env1}")
+    @Value("${secret.env1}")
     private String secretEnv1;
 
     @GetMapping("version")

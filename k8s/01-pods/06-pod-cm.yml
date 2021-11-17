@@ -3,33 +3,94 @@ kind: ConfigMap
 metadata:
   name: my-config-map
 data:
-  key1: value1
+  key1: value1--
   key2: value2
   key3: value3 value3 value3 value3
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-spring-deploy
+  labels:
+    app: my-spring-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-spring-pod
+  template:
+    metadata:
+      labels:
+        app: my-spring-pod
+    spec:
+      containers:
+        - name: my-spring-container
+          image: k8s-spring:0.0.1
+          env:
+            - name: CONFIG_ENV1
+              valueFrom:
+                configMapKeyRef:
+                  name: my-config-map
+                  key: key1
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-node-deploy
+  labels:
+    app: my-node-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-node-pod
+  template:
+    metadata:
+      labels:
+        app: my-node-pod
+    spec:
+      containers:
+        - name: my-node-container
+          image: k8s-node:0.0.1
+          env:
+            - name: ENV1
+              value: ENV1
+            - name: CONFIG_ENV1
+              valueFrom:
+                configMapKeyRef:
+                  name: my-config-map
+                  key: key1
+
 ---
 apiVersion: v1
-kind: Pod
+kind: Service
 metadata:
-  name: my-pod01
+  name: my-spring-service
+  labels:
+    app: my-spring-service
 spec:
-  containers:
-    - name: test-container
-      image: nginx
-      env:
-        - name: ENV1
-          value: ENV1
-        - name: ENV_KEY1
-          valueFrom:
-            configMapKeyRef:
-              name: my-config-map
-              key: key1
-        - name: ENV_KEY2
-          valueFrom:
-            configMapKeyRef:
-              name: my-config-map
-              key: key2
-        - name: ENV_KEY3
-          valueFrom:
-            configMapKeyRef:
-              name: my-config-map
-              key: key3
+  type: NodePort
+  selector:
+    app: my-spring-pod
+  ports:
+    - name: spring-port
+      port: 8080
+      targetPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-node-service
+  labels:
+    app: my-node-service
+spec:
+  type: NodePort
+  selector:
+    app: my-node-pod
+  ports:
+    - name: spring
+      port: 8080
+      targetPort: 8090
