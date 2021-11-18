@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sigap-backend-deploy
+  namespace: sigap
+  labels:
+    app: sigap-backend-deploy
+    app-name: sigap
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sigap-backend-deploy
+      app-name: sigap
+      tier: backend
+  template:
+
+    metadata:
+      name: sigap-backend-deploy
+      labels:
+        app: sigap-backend-deploy
+        app-name: sigap
+        tier: backend
+    spec:
+      imagePullSecrets:
+        - name: github-docker-caisff
+      containers:
+        - name: sigap-backend-container
+          image: ghcr.io/caisff/sigap
+#          image: warsic/sigap
+#          image: ccr.mef/caisff/sigap
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: prod
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: sigap-secret
+                  key: db_username
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: sigap-secret
+                  key: db_password
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: sigap-secret
+                  key: db_name
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: sigap-config
+                  key: db_host
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://${DB_HOST}:5432/${DB_NAME}
+      restartPolicy: Always

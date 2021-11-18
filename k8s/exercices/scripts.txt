@@ -5,6 +5,8 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/cont
 -- Uninstall Nginx Ingress Controller
 kubectl delete -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.0.5/deploy/static/provider/cloud/deploy.yaml
 
+--
+kubectl port-forward --namespace=ingress-nginx service/ingress-nginx-controller 8080:80
 
 
 -- Install Dashbord

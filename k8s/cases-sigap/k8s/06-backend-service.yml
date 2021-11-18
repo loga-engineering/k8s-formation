@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sigap-backend-service
+  namespace: sigap
+  labels:
+    app: sigap-backend-service
+    app-name: sigap
+    tier: backend
+spec:
+  selector:
+    app: sigap-backend-deploy
+    app-name: sigap
+    tier: backend
+  ports:
+    - port: 80
+      targetPort: 8080
+  type: NodePort

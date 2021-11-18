@@ -99,14 +99,10 @@ spec:
               httpGet:
                 port: 80
                 path: /test
-
-              exec:
-                command:
-                  -
             preStop:
               httpGet:
                 port: 8080
-                path: /
+                path: /test
           env:
             - name: SERVER_PORT
               value: '8080'

@@ -42,9 +42,12 @@ spec:
                 secretKeyRef:
                   name: sigap-secret
                   key: db_password
+          volumeMounts:
+            - name: sigap-db-pvc-storage
+              mountPath: /var/lib/postgresql
   volumeClaimTemplates:
     - metadata:
-        name: sigap-db-pvc
+        name: sigap-db-pvc-storage
         labels:
           app: sigap-db
           app-name: sigap
@@ -54,4 +57,4 @@ spec:
           - ReadWriteOnce
         resources:
           requests:
-            storage: 1Gi
+            storage: '8Gi'

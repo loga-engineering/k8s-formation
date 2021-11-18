@@ -1,0 +1,3 @@
+
+
+kubectl -n sigap create secret docker-registry github-docker-caisff --docker-server=https://ghcr.io --docker-username=abocoum --docker-password=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 --docker-email=abocoum@hotmail.fr
