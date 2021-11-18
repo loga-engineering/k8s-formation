@@ -1,0 +1,38 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: my-job
+  labels:
+    app: my-job
+spec:
+  template:
+    metadata:
+      name: my-job-pod
+      labels:
+        app: my-job-pod
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: my-job-container
+          image: hello-world
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: my-cron-job
+  labels:
+    app: my-cron-job
+spec:
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          name: my-job-pod
+          labels:
+            app: my-job-pod
+        spec:
+            restartPolicy: Never
+            containers:
+              - name: my-job-container
+                image: hello-world
+  schedule: '*/1 * * * *'

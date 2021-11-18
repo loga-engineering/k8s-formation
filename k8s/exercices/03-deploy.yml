@@ -92,6 +92,21 @@ spec:
       containers:
         - name: my-node-pod
           image: k8s-node:0.0.3
+          securityContext:
+            runAsNonRoot: true
+          lifecycle:
+            postStart:
+              httpGet:
+                port: 80
+                path: /test
+
+              exec:
+                command:
+                  -
+            preStop:
+              httpGet:
+                port: 8080
+                path: /
           env:
             - name: SERVER_PORT
               value: '8080'
@@ -102,6 +117,14 @@ spec:
                 secretKeyRef:
                   key: key1
                   name: my-secret
+            - name: ENV
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+
+          envFrom:
+            - configMapRef:
+                name: my-config
 ---
 apiVersion: v1
 kind: Service

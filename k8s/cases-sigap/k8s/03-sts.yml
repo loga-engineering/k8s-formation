@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sigap-db-sts
+  namespace: sigap
+  labels:
+    app: sigap-db
+    app-name: sigap
+    tier: database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sigap-db
+      app-name: sigap
+      tier: database
+  serviceName: sigap-db-service
+  template:
+    metadata:
+      name: sigap-db-pod
+      labels:
+        app: sigap-db
+        app-name: sigap
+        tier: database
+    spec:
+      containers:
+        - name: sigap-db-container
+          image: postgres:12
+          env:
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: sigap-secret
+                  key: db_name
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: sigap-secret
+                  key: db_username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: sigap-secret
+                  key: db_password
+  volumeClaimTemplates:
+    - metadata:
+        name: sigap-db-pvc
+        labels:
+          app: sigap-db
+          app-name: sigap
+          tier: database
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
